@@ -189,4 +189,34 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // ========== КОПИРОВАНИЕ КОНТАКТОВ ==========
+    const copyIcons = document.querySelectorAll('.copy-icon');
+    copyIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const textToCopy = this.dataset.copy;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Создаём всплывающую подсказку
+                const tooltip = document.createElement('div');
+                tooltip.className = 'copy-tooltip';
+                tooltip.textContent = 'Скопировано!';
+                document.body.appendChild(tooltip);
+                
+                // Позиционируем возле курсора
+                const x = e.clientX;
+                const y = e.clientY;
+                tooltip.style.left = x + 'px';
+                tooltip.style.top = (y - 40) + 'px';
+                
+                // Удаляем через 1.5 секунды
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 1500);
+            }).catch(err => {
+                console.error('Ошибка копирования:', err);
+            });
+        });
+    });
 });
