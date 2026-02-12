@@ -29,7 +29,7 @@ a {
     color: var(--primary);
 }
 
-/* ===== СТИЛИЗОВАННЫЙ СКРОЛЛ (для всей страницы) ===== */
+/* ===== СТИЛИЗОВАННЫЙ СКРОЛЛ ===== */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -50,7 +50,6 @@ a {
     background: var(--primary);
 }
 
-/* Для Firefox */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--surface-light) var(--surface);
@@ -296,7 +295,7 @@ h2 {
     opacity: 0.8;
 }
 
-/* ===== КОНТАКТЫ ===== */
+/* ===== КОНТАКТЫ (обновлённые стили) ===== */
 .contacts {
     background: var(--surface);
     padding: 2.5rem;
@@ -316,11 +315,55 @@ h2 {
     align-items: center;
     gap: 1rem;
     font-size: 1.2rem;
+    flex-wrap: wrap;
 }
 
-.contact-item i {
+.contact-item i:first-child {
     width: 2rem;
     color: var(--primary);
+}
+
+.contact-link {
+    color: var(--text);
+    transition: color 0.2s;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-secondary);
+}
+
+.contact-link:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.copy-icon {
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+    font-size: 1.1rem;
+    margin-left: auto;
+}
+
+.copy-icon:hover {
+    color: var(--primary);
+}
+
+.copy-tooltip {
+    position: fixed;
+    background: var(--primary);
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 3000;
+    animation: fadeOut 1.5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 /* ===== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ===== */
@@ -361,5 +404,13 @@ h2 {
 
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .contact-item {
+        font-size: 1rem;
+    }
+
+    .copy-icon {
+        margin-left: 0;
     }
 }
