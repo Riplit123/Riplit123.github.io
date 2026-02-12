@@ -7,7 +7,7 @@
     <!-- Font Awesome 6 (иконки) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Подключаем внешний CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- НАВИГАЦИЯ ПО ЦЕНТРУ -->
@@ -25,16 +25,18 @@
             <h2>Обо мне</h2>
             <div class="about-content">
                 <div class="about-text">
-                    <p class="greeting">Разработчик игр и интерактивных приложений</p>
+                    <p class="greeting">Привет! Я — разработчик игр и интерактивных приложений 🎮</p>
                     <p>
-                      На стадии заполнения
+                        Начинал с модов для Minecraft, сейчас делаю инди-проекты на Unity и Godot. 
+                        Люблю процедурную генерацию, головоломки и пиксель-арт. Участвовал в трёх геймджемах, 
+                        дважды в топ-20. В свободное время изучаю шейдеры и пишу небольшие игры под Android.
                     </p>
                 </div>
                 <div class="tech-stack">
                     <span class="tech-badge">C# / Unity</span>
-                    <span class="tech-badge">HTML, CSS, JS</span>
-                    <span class="tech-badge">TouchDesigner</span>
-                    <span class="tech-badge">C# / .NET MAUI</span>
+                    <span class="tech-badge">Godot / GDScript</span>
+                    <span class="tech-badge">Blender</span>
+                    <span class="tech-badge">Aseprite</span>
                     <span class="tech-badge">Git / GitHub</span>
                 </div>
             </div>
@@ -46,18 +48,20 @@
             <div class="projects-grid" id="projectsGrid"></div>
         </section>
 
-        <!-- СЕКЦИЯ КОНТАКТЫ (только Telegram и Email) -->
+        <!-- СЕКЦИЯ КОНТАКТЫ (Telegram и Email) -->
         <section id="contacts">
             <h2>Контакты</h2>
             <div class="contacts">
                 <div class="contacts-list">
                     <div class="contact-item">
                         <i class="fab fa-telegram"></i>
-                        <span>https://t.me/DmitryN1k</span>
+                        <a href="https://t.me/your_telegram" target="_blank" class="contact-link">@your_telegram</a>
+                        <i class="fas fa-copy copy-icon" data-copy="@your_telegram"></i>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <span>nikitindmitriy.nn@gmail.com</span>
+                        <a href="mailto:your.email@example.com" class="contact-link">your.email@example.com</a>
+                        <i class="fas fa-copy copy-icon" data-copy="your.email@example.com"></i>
                     </div>
                 </div>
             </div>
@@ -73,8 +77,9 @@
     </div>
 
     <!-- Подключаем внешний JavaScript -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
+
 
 
