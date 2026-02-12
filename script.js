@@ -1,18 +1,17 @@
-// ========== ДАННЫЕ ПРОЕКТОВ ==========
-// Редактируйте этот массив — добавляйте свои проекты
+// ========== ДАННЫЕ ПРОЕКТОВ (6 штук) ==========
 const projectsData = [
     {
         id: 1,
         title: "Космический шутер",
         shortDesc: "2D аркада, 5 уровней, боссы, система апгрейдов",
         fullDesc: "Мой первый серьёзный проект на Unity. Релиз на Itch.io, ~500 загрузок. Научился работать с физикой, корутинами и пулом объектов.",
-        thumbnail: "images/thumbnails/space-shooter.jpg", // замените на свой путь
+        thumbnail: "images/thumbnails/space-shooter.jpg",
         screenshots: [
             "images/screenshots/space-shooter/01.jpg",
             "images/screenshots/space-shooter/02.jpg",
             "images/screenshots/space-shooter/03.jpg"
         ],
-        video: "", // оставьте пустым или укажите путь к .mp4
+        video: "",
         links: {
             itch: "https://itch.io/your-game",
             github: "https://github.com/yourusername/space-shooter",
@@ -48,6 +47,53 @@ const projectsData = [
         video: "",
         links: {
             github: "https://github.com/yourusername/pixel-farm"
+        }
+    },
+    {
+        id: 4,
+        title: "Ритм-драка",
+        shortDesc: "Музыкальная игра, где враги двигаются в такт",
+        fullDesc: "Экспериментальный проект на Godot. Геймплей в стиле Crypt of the Necrodancer, но с процедурной генерацией уровней под музыку.",
+        thumbnail: "images/thumbnails/rhythm-brawler.jpg",
+        screenshots: [
+            "images/screenshots/rhythm-brawler/01.jpg",
+            "images/screenshots/rhythm-brawler/02.jpg"
+        ],
+        video: "",
+        links: {
+            itch: "https://itch.io/your-game",
+            github: "https://github.com/yourusername/rhythm-brawler"
+        }
+    },
+    {
+        id: 5,
+        title: "Гравитационный сдвиг",
+        shortDesc: "Платформер со сменой гравитации",
+        fullDesc: "2D платформер, где игрок может менять направление силы тяжести. 10 уровней, секреты, три вида врагов.",
+        thumbnail: "images/thumbnails/gravity-shift.jpg",
+        screenshots: [
+            "images/screenshots/gravity-shift/01.jpg",
+            "images/screenshots/gravity-shift/02.jpg",
+            "images/screenshots/gravity-shift/03.jpg"
+        ],
+        video: "",
+        links: {
+            github: "https://github.com/yourusername/gravity-shift"
+        }
+    },
+    {
+        id: 6,
+        title: "Карточный подземелье",
+        shortDesc: "Роглайт-карточная игра в стиле Darkest Dungeon",
+        fullDesc: "Собирайте колоду, сражайтесь с монстрами, прокачивайте героев. Сделана за месяц в рамках инди-челленджа.",
+        thumbnail: "images/thumbnails/card-dungeon.jpg",
+        screenshots: [
+            "images/screenshots/card-dungeon/01.jpg",
+            "images/screenshots/card-dungeon/02.jpg"
+        ],
+        video: "",
+        links: {
+            itch: "https://itch.io/your-game"
         }
     }
 ];
