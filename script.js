@@ -2,9 +2,9 @@
 const projectsData = [
     {
         id: 1,
-        title: "Космический шутер",
-        shortDesc: "2D аркада, 5 уровней, боссы, система апгрейдов",
-        fullDesc: "Мой первый серьёзный проект на Unity. Релиз на Itch.io, ~500 загрузок. Научился работать с физикой, корутинами и пулом объектов.",
+        title: "Проект 6",
+        shortDesc: "Командная стратегическая игра Экспериментариум",
+        fullDesc: "",
         thumbnail: "images/thumbnails/space-shooter.jpg",
         screenshots: [
             "images/screenshots/space-shooter/01.jpg",
@@ -20,9 +20,9 @@ const projectsData = [
     },
     {
         id: 2,
-        title: "Лабиринт страха",
-        shortDesc: "3D хоррор-головоломка с видом от первого лица",
-        fullDesc: "Сделано за 72 часа на геймджеме. Тема — «темнота». Использовал Godot 4, модели в Blender. Занял 14 место.",
+        title: "Проект 5",
+        shortDesc: "Командная стратегическая игра для маленьких детей Лабораторная битва",
+        fullDesc: "",
         thumbnail: "images/thumbnails/maze-of-fear.jpg",
         screenshots: [
             "images/screenshots/maze-of-fear/01.jpg",
@@ -36,9 +36,9 @@ const projectsData = [
     },
     {
         id: 3,
-        title: "Пиксельная ферма",
-        shortDesc: "Тайкун про выращивание кристаллов (мобильная версия)",
-        fullDesc: "Прототип для Android. Сделал инвентарь, сохранения, простой AI для монстров. Сейчас в работе.",
+        title: "Проект 4",
+        shortDesc: "Командная стратегическая игра Алхимическая битва",
+        fullDesc: "",
         thumbnail: "images/thumbnails/pixel-farm.jpg",
         screenshots: [
             "images/screenshots/pixel-farm/01.jpg",
@@ -51,9 +51,9 @@ const projectsData = [
     },
     {
         id: 4,
-        title: "Ритм-драка",
-        shortDesc: "Музыкальная игра, где враги двигаются в такт",
-        fullDesc: "Экспериментальный проект на Godot. Геймплей в стиле Crypt of the Necrodancer, но с процедурной генерацией уровней под музыку.",
+        title: "Проект 3",
+        shortDesc: "Мини игра по уборке комнаты",
+        fullDesc: "Развивающая игра для детей по уброке мусора в команатах",
         thumbnail: "images/thumbnails/rhythm-brawler.jpg",
         screenshots: [
             "images/screenshots/rhythm-brawler/01.jpg",
@@ -67,9 +67,9 @@ const projectsData = [
     },
     {
         id: 5,
-        title: "Гравитационный сдвиг",
-        shortDesc: "Платформер со сменой гравитации",
-        fullDesc: "2D платформер, где игрок может менять направление силы тяжести. 10 уровней, секреты, три вида врагов.",
+        title: "Проект 2",
+        shortDesc: "Обучающее приложение",
+        fullDesc: "Обучющее профориентационное приложение",
         thumbnail: "images/thumbnails/gravity-shift.jpg",
         screenshots: [
             "images/screenshots/gravity-shift/01.jpg",
@@ -83,9 +83,9 @@ const projectsData = [
     },
     {
         id: 6,
-        title: "Карточный подземелье",
-        shortDesc: "Роглайт-карточная игра в стиле Darkest Dungeon",
-        fullDesc: "Собирайте колоду, сражайтесь с монстрами, прокачивайте героев. Сделана за месяц в рамках инди-челленджа.",
+        title: "Проект 1",
+        shortDesc: "Интерактивная карта России",
+        fullDesc: "Интерактивная карта России с регионами участниками фестиваля Технострелка",
         thumbnail: "images/thumbnails/card-dungeon.jpg",
         screenshots: [
             "images/screenshots/card-dungeon/01.jpg",
@@ -220,3 +220,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
