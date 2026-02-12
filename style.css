@@ -29,6 +29,33 @@ a {
     color: var(--primary);
 }
 
+/* ===== СТИЛИЗОВАННЫЙ СКРОЛЛ (для всей страницы) ===== */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--surface-light);
+    border-radius: 10px;
+    border: 2px solid var(--surface);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Для Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-light) var(--surface);
+}
+
 /* ===== НАВИГАЦИЯ ===== */
 nav {
     position: fixed;
