@@ -71,10 +71,15 @@ nav {
 
 /* Бренд скрыт на десктопе, показывается на мобиле */
 .nav-brand {
-    display: none;
+    display: block;                 /* было none — теперь виден на десктопе */
+    position: absolute;
+    left: 1.5rem;                   /* тот же отступ, что padding контейнера/main */
+    top: 50%;
+    transform: translateY(-50%);
     font-weight: 600;
     font-size: 1.05rem;
     color: var(--text);
+    white-space: nowrap;
 }
 
 .nav-links {
@@ -658,7 +663,12 @@ h2 {
         gap: 1rem;
     }
 
-    .nav-brand { display: block; }
+    .nav-brand {
+        position: static;
+        transform: none;
+        left: auto;
+    }
+
     .nav-toggle { display: flex; }
 
     /* Выпадающее меню */
