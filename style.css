@@ -8,6 +8,7 @@
     --text-secondary: #a0a8b0;
     --border: #2a3137;
     --shadow: 0 8px 24px rgba(0,0,0,0.4);
+    --nav-h: 64px;
 }
 
 * {
@@ -16,12 +17,18 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    /* учитываем фикс-навбар при скролле к якорю */
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
-    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -29,31 +36,14 @@ a {
     color: var(--primary);
 }
 
-/* ===== СТИЛИЗОВАННЫЙ СКРОЛЛ ===== */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
+img { max-width: 100%; }
 
-::-webkit-scrollbar-track {
-    background: var(--surface);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--surface-light);
-    border-radius: 10px;
-    border: 2px solid var(--surface);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
-* {
-    scrollbar-width: thin;
-    scrollbar-color: var(--surface-light) var(--surface);
-}
+/* ===== СКРОЛЛ ===== */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--surface); border-radius: 10px; }
+::-webkit-scrollbar-thumb { background: var(--surface-light); border-radius: 10px; border: 2px solid var(--surface); }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+* { scrollbar-width: thin; scrollbar-color: var(--surface-light) var(--surface); }
 
 /* ===== НАВИГАЦИЯ ===== */
 nav {
@@ -65,17 +55,32 @@ nav {
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
-    padding: 1rem 0;
 }
 
 .nav-container {
     max-width: 1100px;
     margin: 0 auto;
+    min-height: var(--nav-h);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 3rem;
     padding: 0 1.5rem;
+    position: relative;
+}
+
+/* Бренд скрыт на десктопе, показывается на мобиле */
+.nav-brand {
+    display: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
 }
 
 .nav-link {
@@ -85,20 +90,44 @@ nav {
     font-size: 1.1rem;
 }
 
-.nav-link:hover {
-    color: var(--primary);
+.nav-link:hover { color: var(--primary); }
+
+/* Бургер-кнопка (скрыта на десктопе) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0 9px;
 }
+
+.nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
 main {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 1.5rem 40px;
+    padding: calc(var(--nav-h) + 24px) 1.5rem 40px;
 }
 
-section {
-    margin-bottom: 5rem;
-}
+section { margin-bottom: 5rem; }
 
 h2 {
     font-size: 2.2rem;
@@ -127,33 +156,60 @@ h2 {
     color: var(--text-secondary);
 }
 
+.about-text p + p { margin-top: 1rem; }
+
 .greeting {
     font-size: 1.5rem;
     color: var(--text);
     margin-bottom: 1rem;
 }
 
+.tech-group { margin-top: 0.5rem; }
+
+.tech-group-label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.7rem;
+}
+
 .tech-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.8rem;
 }
 
 .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     background: var(--surface-light);
     color: var(--text);
-    padding: 0.5rem 1.2rem;
+    padding: 0.55rem 1.25rem;
     border-radius: 40px;
     font-size: 0.95rem;
     font-weight: 500;
     border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
 }
 
-/* ===== ПОРТФОЛИО: СЕТКА КАРТОЧЕК ===== */
+.tech-badge:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.tech-badge i {
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+/* ===== ПОРТФОЛИО ===== */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 1.5rem;
 }
@@ -163,7 +219,7 @@ h2 {
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     cursor: pointer;
 }
 
@@ -173,16 +229,33 @@ h2 {
     border-color: var(--primary);
 }
 
-.project-thumb {
+.project-thumb-wrapper {
+    position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    object-fit: cover;
     background: var(--surface-light);
+    overflow: hidden;
 }
 
-.project-info {
-    padding: 1.5rem;
+.project-thumb-wrapper .project-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
+
+.project-thumb-placeholder {
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--surface-light) 0%, var(--surface) 100%);
+    color: var(--text-secondary);
+    font-size: 3rem;
+    opacity: 0.4;
+}
+
+.project-info { padding: 1.5rem; }
 
 .project-title {
     font-size: 1.4rem;
@@ -193,17 +266,13 @@ h2 {
 .project-short-desc {
     color: var(--text-secondary);
     font-size: 0.95rem;
-    margin-bottom: 1rem;
 }
 
 /* ===== МОДАЛЬНОЕ ОКНО ===== */
 .modal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-color: rgba(0,0,0,0.9);
     z-index: 2000;
     overflow-y: auto;
@@ -212,19 +281,20 @@ h2 {
 
 .modal.active {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
 .modal-content {
     background: var(--surface);
-    max-width: 1000px;
+    max-width: 1100px;
     width: 100%;
-    border-radius: 32px;
+    border-radius: 28px;
     border: 1px solid var(--border);
     padding: 2rem;
     position: relative;
     animation: modalFadeIn 0.3s;
+    margin: auto;
 }
 
 @keyframes modalFadeIn {
@@ -234,68 +304,272 @@ h2 {
 
 .modal-close {
     position: absolute;
-    top: 1.5rem;
-    right: 1.8rem;
+    top: 1rem;
+    right: 1.2rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 2rem;
     color: var(--text-secondary);
     cursor: pointer;
     transition: color 0.2s;
+    line-height: 1;
+    z-index: 10;
+    border-radius: 50%;
 }
 
-.modal-close:hover {
-    color: var(--primary);
-}
-
-.modal-media {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.2rem;
-    margin: 1.8rem 0;
-}
-
-.modal-media img,
-.modal-media video {
-    width: 100%;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-}
+.modal-close:hover { color: var(--primary); }
 
 .modal-title {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: 0.8rem;
-    padding-right: 2rem;
+    padding-right: 2.5rem;
 }
 
 .modal-desc {
     color: var(--text-secondary);
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    white-space: pre-wrap;
+    text-align: justify;
 }
 
-.modal-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+/* ===== СВОРАЧИВАЕМОЕ ОПИСАНИЕ ===== */
+.modal-desc-dots {
+    color: var(--text-secondary);
 }
 
-.modal-link {
+.modal-desc-rest {
+    display: inline;
+}
+
+/* Скрытая часть — надёжно прячем через класс */
+.modal-desc-rest.is-hidden {
+    display: none;
+}
+
+.modal-desc-toggle {
+    display: inline-block;
+    margin: -0.5rem 0 1.5rem;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 0.4rem 1.1rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: inherit;
+}
+
+.modal-desc-toggle:hover {
     background: var(--primary);
     color: #000;
+}
+
+/* ===== ТЕХНОЛОГИИ В МОДАЛКЕ ===== */
+.modal-tech {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem 0.8rem;
+    margin-bottom: 1.2rem;
+}
+
+.modal-tech-label {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.modal-tech-label i { color: var(--primary); }
+
+.modal-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.modal-tech-chip {
+    background: var(--surface-light);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.3rem 0.85rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+.gallery {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    align-items: start;
+}
+
+.gallery-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    max-height: 560px;
+    overflow-y: auto;
+    /* запас, чтобы рамка/тень при выделении не обрезались */
+    padding: 4px;
+    margin: -4px;
+}
+
+.gallery-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    background: var(--surface-light);
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
+    /* БАГ-ФИКС: убран transform/scale на hover. Только цвет рамки. */
+    transition: border-color 0.2s;
+}
+
+.gallery-thumb:hover { border-color: var(--primary); }
+
+.gallery-thumb.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.4);
+}
+
+.gallery-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-thumb-broken::after {
+    content: "\f03e";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    opacity: 0.4;
+    font-size: 1.4rem;
+}
+
+.gallery-thumb-novideo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    background: var(--surface-light);
+}
+
+.gallery-thumb-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    pointer-events: none;
+}
+
+.gallery-thumb-play i {
+    background: rgba(0,0,0,0.55);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.gallery-main {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface-light);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-main img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    display: block;
+}
+
+.gallery-main-broken { position: relative; }
+
+.gallery-main-broken::after {
+    content: "Изображение недоступно";
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    padding: 3rem 1rem;
+}
+
+.gallery-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+}
+
+.gallery-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.gallery-video-error {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem 1.5rem;
+}
+
+.gallery-video-error i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+}
+
+.gallery-video-error p { margin-bottom: 1rem; }
+
+.gallery-video-link {
+    display: inline-block;
+    background: var(--primary);
+    color: #000;
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
     font-weight: 600;
-    padding: 0.6rem 1.6rem;
-    border-radius: 40px;
-    transition: opacity 0.2s;
 }
 
-.modal-link:hover {
-    opacity: 0.8;
-}
-
-/* ===== КОНТАКТЫ (обновлённые стили) ===== */
+/* ===== КОНТАКТЫ ===== */
 .contacts {
     background: var(--surface);
     padding: 2.5rem;
@@ -307,7 +581,6 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    margin-top: 1.2rem;
 }
 
 .contact-item {
@@ -321,13 +594,14 @@ h2 {
 .contact-item i:first-child {
     width: 2rem;
     color: var(--primary);
+    text-align: center;
 }
 
 .contact-link {
     color: var(--text);
     transition: color 0.2s;
-    text-decoration: none;
     border-bottom: 1px dashed var(--text-secondary);
+    word-break: break-word;
 }
 
 .contact-link:hover {
@@ -341,11 +615,10 @@ h2 {
     transition: color 0.2s;
     font-size: 1.1rem;
     margin-left: auto;
+    padding: 0.4rem;
 }
 
-.copy-icon:hover {
-    color: var(--primary);
-}
+.copy-icon:hover { color: var(--primary); }
 
 .copy-tooltip {
     position: fixed;
@@ -357,6 +630,7 @@ h2 {
     font-weight: 500;
     pointer-events: none;
     z-index: 3000;
+    transform: translateX(-50%);
     animation: fadeOut 1.5s forwards;
 }
 
@@ -366,51 +640,269 @@ h2 {
     100% { opacity: 0; }
 }
 
-/* ===== АДАПТАЦИЯ ДЛЯ МОБИЛЬНЫХ ===== */
-@media (max-width: 768px) {
-    .nav-container {
-        gap: 1.8rem;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    .about-content {
-        padding: 1.8rem;
-    }
-
-    .project-card {
-        border-radius: 16px;
-    }
-
-    .modal-content {
-        padding: 1.5rem;
-    }
-
-    .modal-title {
-        font-size: 1.6rem;
-    }
+/* ===== АДАПТАЦИЯ: ПЛАНШЕТЫ ===== */
+@media (max-width: 900px) {
+    h2 { font-size: 2rem; }
+    .about-content,
+    .contacts { padding: 2rem; }
+    .about-text { font-size: 1.1rem; }
+    .greeting { font-size: 1.35rem; }
+    section { margin-bottom: 4rem; }
 }
 
-@media (max-width: 480px) {
+/* ===== АДАПТАЦИЯ: МОБИЛЬНЫЕ (бургер-меню включается) ===== */
+@media (max-width: 768px) {
+    /* --- Навигация: бренд + бургер --- */
     .nav-container {
-        gap: 1.2rem;
+        justify-content: space-between;
+        gap: 1rem;
     }
 
+    .nav-brand { display: block; }
+    .nav-toggle { display: flex; }
+
+    /* Выпадающее меню */
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background-color: rgba(10, 12, 15, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        /* скрыто по умолчанию */
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .nav-links.open { max-height: 320px; }
+
     .nav-link {
-        font-size: 1rem;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        border-top: 1px solid var(--border);
+    }
+    .nav-links .nav-link:first-child { border-top: none; }
+
+    /* --- Контент --- */
+    h2 { font-size: 1.8rem; }
+    section { margin-bottom: 3.5rem; }
+
+    .about-content { padding: 1.6rem; border-radius: 20px; }
+    .about-text { font-size: 1.05rem; }
+    .greeting { font-size: 1.3rem; }
+
+    .tech-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
 
     .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .project-card { border-radius: 16px; }
+    .project-info { padding: 1.2rem; }
+    .project-title { font-size: 1.25rem; }
+
+    /* --- Модалка --- */
+    .modal { padding: 1rem 0.6rem; }
+    .modal-content { padding: 1.5rem; border-radius: 22px; }
+    .modal-title { font-size: 1.6rem; }
+    .modal-desc { font-size: 1rem; }
+
+    /* --- Галерея: миниатюры уходят вниз и становятся горизонтальными --- */
+    .gallery {
         grid-template-columns: 1fr;
     }
-
-    .contact-item {
-        font-size: 1rem;
+    .gallery-main {
+        order: 1;
+        min-height: 200px;
+    }
+    .gallery-thumbs {
+        order: 2;
+        flex-direction: row;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 4px;
+        margin: -4px;
+    }
+    .gallery-thumb {
+        width: 80px;
+        flex: 0 0 80px;
     }
 
-    .copy-icon {
-        margin-left: 0;
+    /* --- Контакты --- */
+    .contacts { padding: 1.6rem; border-radius: 20px; }
+}
+
+/* ===== АДАПТАЦИЯ: МАЛЕНЬКИЕ ТЕЛЕФОНЫ ===== */
+@media (max-width: 480px) {
+    main { padding-left: 1rem; padding-right: 1rem; }
+
+    h2 { font-size: 1.6rem; }
+
+    .about-content { padding: 1.3rem; }
+    .about-text { font-size: 1rem; }
+    .greeting { font-size: 1.2rem; }
+    .tech-group-label { font-size: 0.85rem; }
+
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-title { font-size: 1.2rem; }
+
+    .modal-content { padding: 1.2rem; }
+    .modal-title { font-size: 1.4rem; padding-right: 2rem; }
+
+    .gallery-thumb { width: 64px; flex: 0 0 64px; }
+
+    .contacts { padding: 1.3rem; }
+    .contact-item { font-size: 1rem; gap: 0.7rem; }
+    .copy-icon { margin-left: auto; }
+}
+
+/* ===== УСТРОЙСТВА С СЕНСОРОМ (без hover-эффектов) ===== */
+@media (hover: none) {
+    .project-card:active {
+        transform: scale(0.99);
+    }
+    /* Отключаем «всплывающие» hover-эффекты на тач-экранах,
+       чтобы не залипали после тапа */
+    .project-card:hover {
+        transform: none;
+        box-shadow: none;
+        border-color: var(--border);
+    }
+    .tech-badge:hover {
+        transform: none;
+        border-color: var(--border);
+    }
+}
+
+/* Пункт с тегами (видеоигры/приложения/инсталляции) — по центру */
+.summary-item-tags {
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.summary-item-tags .summary-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.summary-item-tags .summary-value i {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin-right: 0.15rem;
+}
+
+/* ===== СВОДКА ПОРТФОЛИО ===== */
+.portfolio-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.1rem 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.summary-item > i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.summary-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+}
+
+.summary-value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.summary-label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.summary-divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--border);
+}
+
+/* Пункт с тегами (видеоигры/приложения/инсталляции) — по центру */
+.summary-item-tags {
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.summary-item-tags .summary-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.summary-item-tags .summary-value i {
+    color: var(--primary);
+    font-size: 1.15rem;
+    margin-right: 0.15rem;
+}
+
+/* Планшеты / мобильные */
+@media (max-width: 768px) {
+    .portfolio-summary {
+        gap: 0.9rem 1.4rem;
+        padding: 1rem 1.3rem;
+        border-radius: 16px;
+    }
+    .summary-item > i { font-size: 1.3rem; }
+    .summary-value { font-size: 1rem; }
+    .summary-label { font-size: 0.78rem; }
+}
+
+/* Узкие экраны — в столбик, разделитель прячем */
+@media (max-width: 560px) {
+    .summary-divider { display: none; }
+    .portfolio-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+    }
+    .summary-item-tags {
+        justify-content: flex-start;
+        width: 100%;
+    }
+    .summary-item-tags .summary-value {
+        justify-content: flex-start;
+        text-align: left;
     }
 }
