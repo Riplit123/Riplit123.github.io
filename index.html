@@ -2,51 +2,90 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Дмитрий Никитин</title>
-    <!-- Font Awesome 6 (иконки) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Подключаем внешний CSS -->
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Simple Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v11/font/simple-icons.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- НАВИГАЦИЯ ПО ЦЕНТРУ -->
+    <!-- НАВИГАЦИЯ -->
     <nav>
         <div class="nav-container">
-            <a href="#about" class="nav-link">Обо мне</a>
-            <a href="#portfolio" class="nav-link">Портфолио</a>
-            <a href="#contacts" class="nav-link">Контакты</a>
+            <span class="nav-brand">Дмитрий Никитин</span>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#about" class="nav-link">Обо мне</a>
+                <a href="#portfolio" class="nav-link">Портфолио</a>
+                <a href="#contacts" class="nav-link">Контакты</a>
+            </div>
         </div>
     </nav>
 
     <main>
-        <!-- СЕКЦИЯ ОБО МНЕ -->
+        <!-- ОБО МНЕ -->
         <section id="about">
             <h2>Обо мне</h2>
             <div class="about-content">
                 <div class="about-text">
                     <p class="greeting">Разработчик игр и интерактивных решений</p>
-                    <p>
-                        На стадии заполнения
-                    </p>
+                    <p>Создаю игры, интерактивные приложения и визуальные инсталляции
+                    для мероприятий, фестивалей и образовательных проектов. Работаю как над
+                    механиками и техническим составляющим проектов, так и над визуальной их частью — от идеи до готового решения.</p>
+                    <p>Помимо разработки, имею 3 года опыта работы системным администратором:
+                    обслуживание ОС, диагностика оборудования и решение технических проблем, настройка
+                    сетевого и серверного оборудования.</p>
                 </div>
-                <div class="tech-stack">
-                    <span class="tech-badge">C# / Unity</span>
-                    <span class="tech-badge">HTML CSS JS</span>
-                    <span class="tech-badge">TouchDesigner</span>
-                    <span class="tech-badge">C# / .NET MAUI</span>
-                    <span class="tech-badge">Git / GitHub</span>
+
+                <!-- Группа: Разработка и медиа -->
+                <div class="tech-group">
+                    <div class="tech-stack">
+                        <span class="tech-badge"><i class="fas fa-gamepad"></i>Godot</span>
+                        <span class="tech-badge"><i class="fab fa-js"></i>JavaScript</span>
+                        <span class="tech-badge"><i class="fab fa-html5"></i>HTML</span>
+                        <span class="tech-badge"><i class="fab fa-css3-alt"></i>CSS</span>
+                        <span class="tech-badge"><i class="fab fa-node-js"></i>Node.js</span>
+                        <span class="tech-badge"><i class="si si-csharp"></i>C#</span>
+                        <span class="tech-badge"><i class="fab fa-unity"></i>Unity</span>
+                        <span class="tech-badge"><i class="fas fa-project-diagram"></i>TouchDesigner</span>
+                        <span class="tech-badge"><i class="fab fa-git-alt"></i>Git</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- СЕКЦИЯ ПОРТФОЛИО -->
+       <!-- ПОРТФОЛИО -->
         <section id="portfolio">
             <h2>Портфолио</h2>
+
+            <div class="portfolio-summary">
+                <div class="summary-item">
+                    <i class="fas fa-layer-group"></i>
+                    <div class="summary-text">
+                        <span class="summary-value">16 проектов за год</span>
+                        <span class="summary-label">(лето 2025 — лето 2026)</span>
+                    </div>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-item summary-item-tags">
+                    <span class="summary-value">
+                        <i class="fas fa-gamepad"></i> Видеоигры
+                        <i class="fas fa-display"></i> Приложения
+                        <i class="fas fa-cubes"></i> Интерактивные инсталляции
+                    </span>
+                </div>
+            </div>
+
             <div class="projects-grid" id="projectsGrid"></div>
         </section>
 
-        <!-- СЕКЦИЯ КОНТАКТЫ (Telegram и Email) -->
+        <!-- КОНТАКТЫ -->
         <section id="contacts">
             <h2>Контакты</h2>
             <div class="contacts">
@@ -54,7 +93,7 @@
                     <div class="contact-item">
                         <i class="fab fa-telegram"></i>
                         <a href="https://t.me/DmitryN1k" target="_blank" class="contact-link">t.me/DmitryN1k</a>
-                        <i class="fas fa-copy copy-icon" data-copy="@your_telegram"></i>
+                        <i class="fas fa-copy copy-icon" data-copy="@DmitryN1k"></i>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
@@ -74,12 +113,6 @@
         </div>
     </div>
 
-    <!-- Подключаем внешний JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
