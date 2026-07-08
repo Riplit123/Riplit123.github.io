@@ -169,6 +169,7 @@ const projectsData = [
         tech: ["HTML", "CSS", "JavaScript", "Node.js"],
         thumbnail: "images/p5/i1.png",
         media: [
+            // VK Видео — вставь свою ссылку вместо примера ниже
             { type: "video", url: "https://vkvideo.ru/video-240011720_456239033", thumb: "images/p5/i1.png" }
         ]
     },
@@ -277,7 +278,7 @@ function buildVideoEmbed(url) {
     
     let vkExt = url.match(/video_ext\.php\?[^"'\s]+/);
     if (vkExt) {
-        
+        // Уже готовая embed-ссылка
         return url.startsWith('http') ? url : `https://vk.com/${vkExt[0]}`;
     }
     let vk = url.match(/(?:vk\.com|vkvideo\.ru)\/video(-?\d+)_(\d+)(?:%2F|\/|\?.*?hash=)?([a-zA-Z0-9]+)?/);
@@ -342,7 +343,7 @@ function renderProjects() {
     });
 }
 
-
+// ===== ОТКРЫТИЕ МОДАЛКИ =====
 function openModal(index) {
     const project = projectsData[index];
     if (!project) return;
@@ -362,7 +363,7 @@ function openModal(index) {
         `;
     }
 
-   
+    // Описание проекта
     if (project.shortFullDesc || project.restFullDesc) {
         const shortPart = escapeHtml(project.shortFullDesc || '');
         const restPart = escapeHtml(project.restFullDesc || '');
@@ -421,11 +422,11 @@ function openModal(index) {
         initGallery(media);
     }
 
-    
+    // Кнопка «Полное описание / Свернуть»
     initDescToggle();
 }
 
-
+// ===== СВОРАЧИВАЕМОЕ ОПИСАНИЕ =====
 function initDescToggle() {
     const btn = document.getElementById('descToggle');
     const dots = document.getElementById('descDots');
@@ -446,7 +447,7 @@ function initDescToggle() {
     });
 }
 
-
+// ===== ГАЛЕРЕЯ =====
 function initGallery(media) {
     const mainEl = document.getElementById('galleryMain');
     const thumbs = document.querySelectorAll('.gallery-thumb');
@@ -467,7 +468,7 @@ function initGallery(media) {
                     </div>
                 `;
             } else {
-                
+                // Ссылка не распознана — даём кнопку на внешний переход
                 mainEl.innerHTML = `
                     <div class="gallery-video-error">
                         <i class="fas fa-triangle-exclamation"></i>
@@ -479,36 +480,38 @@ function initGallery(media) {
                 `;
             }
         } else {
-           
+            // Изображение
             mainEl.innerHTML = `
                 <img src="${escapeHtml(item.src)}" alt="фото проекта" loading="lazy"
                      onerror="this.style.display='none';this.parentElement.classList.add('gallery-main-broken');">
             `;
         }
 
-        
+        // Подсветка активной миниатюры
         thumbs.forEach((t, idx) => t.classList.toggle('active', idx === i));
     }
 
-    
+    // Клик по миниатюре
     thumbs.forEach(thumb => {
         thumb.addEventListener('click', () => {
             showItem(parseInt(thumb.dataset.index));
         });
     });
 
-    
+    // Показываем первый элемент
     showItem(0);
 }
 
-
+// ===== ЗАКРЫТИЕ МОДАЛКИ =====
 function closeModal() {
     const modal = document.getElementById('projectModal');
     modal.classList.remove('active');
+    // Очищаем содержимое, чтобы остановить воспроизведение видео
     document.getElementById('modalDynamicContent').innerHTML = '';
     document.body.style.overflow = '';
 }
 
+// ===== МОБИЛЬНОЕ МЕНЮ (БУРГЕР) =====
 function initMobileMenu() {
     const toggle = document.getElementById('navToggle');
     const links = document.getElementById('navLinks');
@@ -526,15 +529,18 @@ function initMobileMenu() {
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
 
+    // Открытие/закрытие по кнопке
     toggle.addEventListener('click', (e) => {
         e.stopPropagation();
         toggleMenu();
     });
 
+    // Закрытие при клике на пункт меню
     links.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', closeMenu);
     });
 
+    // Закрытие при клике вне меню
     document.addEventListener('click', (e) => {
         if (links.classList.contains('open') &&
             !links.contains(e.target) &&
@@ -543,29 +549,35 @@ function initMobileMenu() {
         }
     });
 
+    // Закрытие при возврате на десктоп-ширину
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) closeMenu();
     });
 }
 
+// ===== ИНИЦИАЛИЗАЦИЯ =====
 document.addEventListener('DOMContentLoaded', function () {
     renderProjects();
     initMobileMenu();
 
+    // Закрытие модалки по крестику
     const closeBtn = document.getElementById('closeModalBtn');
     if (closeBtn) {
         closeBtn.addEventListener('click', closeModal);
     }
 
+    // Закрытие по клику вне контента
     window.addEventListener('click', function (e) {
         const modal = document.getElementById('projectModal');
         if (e.target === modal) closeModal();
     });
 
+    // Закрытие по ESC
     window.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') closeModal();
     });
 
+    // Плавный скролл по навигации
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
@@ -574,6 +586,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Копирование контактов
     document.querySelectorAll('.copy-icon').forEach(icon => {
         icon.addEventListener('click', function (e) {
             e.stopPropagation();
@@ -594,6 +607,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(showTooltip)
                     .catch(err => console.error('Ошибка копирования:', err));
             } else {
+                // Запасной вариант для старых браузеров / http
                 const ta = document.createElement('textarea');
                 ta.value = text;
                 ta.style.position = 'fixed';
